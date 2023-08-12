@@ -63,42 +63,42 @@ const BookingList = () => {
           list.push({ id: doc.id, ...doc.data() });
         });
         setData(list);
-        console.log("list", list);
       } catch (err) {
         setError("Unable to Fetch the Data!");
-        console.log(err.message);
       }
     };
     fetchData();
   }, []);
-  console.log("data", data);
   return (
     <Container>
       <Title>Customer Booking</Title>
       {error && <Error>{error}</Error>}
       {data.length ? (
         <Table>
-          <Row>
-            <TableHeading>S. No.</TableHeading>
-            <TableHeading>Customer Name</TableHeading>
-            <TableHeading>Contact No.</TableHeading>
-            <TableHeading>Pet</TableHeading>
-            <TableHeading>Slot Date</TableHeading>
-            <TableHeading>Slot Time</TableHeading>
-          </Row>
-          {data.map((td, index) => {
-            console.log(td, index);
-            return (
-              <Row key={td.id}>
-                <TableData>{index + 1}</TableData>
-                <TableData>{td.name}</TableData>
-                <TableData>{td.phone}</TableData>
-                <TableData>{td.pet}</TableData>
-                <TableData>{td.date}</TableData>
-                <TableData>{td.time}</TableData>
-              </Row>
-            );
-          })}
+          <thead>
+            <Row>
+              <TableHeading>S. No.</TableHeading>
+              <TableHeading>Customer Name</TableHeading>
+              <TableHeading>Contact No.</TableHeading>
+              <TableHeading>Pet</TableHeading>
+              <TableHeading>Slot Date</TableHeading>
+              <TableHeading>Slot Time</TableHeading>
+            </Row>
+          </thead>
+          <tbody>
+            {data.map((td, index) => {
+              return (
+                <Row key={td.id}>
+                  <TableData>{index + 1}</TableData>
+                  <TableData>{td.name}</TableData>
+                  <TableData>{td.phone}</TableData>
+                  <TableData>{td.pet}</TableData>
+                  <TableData>{td.date}</TableData>
+                  <TableData>{td.time}</TableData>
+                </Row>
+              );
+            })}
+          </tbody>
         </Table>
       ) : (
         <NoBooking>No Booking Found!</NoBooking>
